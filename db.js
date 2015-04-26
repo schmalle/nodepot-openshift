@@ -11,9 +11,10 @@ var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
 if (openShiftIP != undefined)
 {
-    client = redis.createClient(16379, openShiftIP, {});
+    client = redis.createClient(process.env.OPENSHIFT_REDIS_DB_PORT, process.env.OPENSHIFT_REDIS_DB_HOST, {});
 }
-else {
+else
+{
     client = redis.createClient();
 }
 

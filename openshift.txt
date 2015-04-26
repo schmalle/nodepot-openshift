@@ -13,6 +13,18 @@ rhc app create <your app name> nodejs-0.10 --from-code=http://github.com/schmall
 
 rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart --app <your app name>
 
+4. ssh into your application
+
+5. copy files around as needed
+
+cd app-root/data
+mkdir html
+mkdir dl
+mkdir download
+mkdir logs
+mkdir log
+cp ./../repo/template/config.js .
+cp ./../repo/html/* ./html/
 
 
 

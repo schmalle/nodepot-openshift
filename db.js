@@ -11,10 +11,12 @@ var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
 if (openShiftIP != undefined)
 {
+    console.log("Starting DB client with ip/port server "  + process.env.OPENSHIFT_REDIS_DB_PORT + " : " + process.env.OPENSHIFT_REDIS_DB_HOST);
     client = redis.createClient(process.env.OPENSHIFT_REDIS_DB_PORT, process.env.OPENSHIFT_REDIS_DB_HOST, {});
 }
 else
 {
+    console.log("Starting DB without special parameters...");
     client = redis.createClient();
 }
 

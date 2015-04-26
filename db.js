@@ -5,8 +5,17 @@
  */
 
 var moment = require("moment");
-var redis = require("redis"),
+var redis = require("redis");
+
+var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+
+if (openShiftIP != undefined)
+{
+    client = redis.createClient(16379, openShiftIP, {});
+}
+else {
     client = redis.createClient();
+}
 
 var fs = require("fs");
 var configGlobal = "none";

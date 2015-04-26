@@ -17,14 +17,8 @@ rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect?github=smart
 
 5. copy files around as needed
 
-cd app-root/data
-mkdir html
-mkdir dl
-mkdir download
-mkdir logs
-mkdir log
-cp ./../repo/template/config.js .
-cp ./../repo/html/* ./html/
+/bin/bash ./app-root/repo/openshift.sh
+
 
 
 

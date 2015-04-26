@@ -102,7 +102,7 @@ function start(configName) {
 
             if (config.twitter.verbose == "yes" && statusAnalyze != null)
             {
-                twitter.tweet(moment().format('MMMM Do YYYY, h:mm:ss a') + "(Nodepot): Found request from ip " + ip);
+                twitter.tweet(moment().format('MMMM Do YYYY, h:mm:ss a') + "(Nodepot): Found request from ip " + ip, config);
             }
 
 

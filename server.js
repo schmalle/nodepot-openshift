@@ -116,7 +116,7 @@ function start(configName) {
 
     if (openShiftIP != undefined)
     {
-        http.createServer(onRequest).listen(port, ip);
+        http.createServer(onRequest).listen(port, openShiftIP);
     }
     else
     {

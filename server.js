@@ -109,18 +109,18 @@ function start(configName) {
         response.end();
     }
 
-    var openShiftIP = process.env.OPENSHIFT_NODEJS_IP;
-    var port = process.env.OPENSHIFT_NODEJS_PORT || config.port;
+    var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+    var port = process.env.OPENSHIFT_NODEJS_PORT;
 
     console.log(moment().format('MMMM Do YYYY, h:mm:ss a') + " Server tries to start on port " + port);
 
     if (openShiftIP != undefined)
     {
-        http.createServer(onRequest).listen(port, openShiftIP);
+        http.createServer(onRequest).listen(process.env.OPENSHIFT_NODEJS_PORT, openShiftIP);
     }
     else
     {
-        http.createServer(onRequest).listen(port);
+        http.createServer(onRequest).listen(config.port);
     }
 
     console.log(moment().format('MMMM Do YYYY, h:mm:ss a') + " Server has started.");

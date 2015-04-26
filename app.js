@@ -33,6 +33,12 @@ else
 
 var config = require(configNew);
 
+if (openShiftDataDir != undefined)
+{
+    configNew.port = process.env.OPENSHIFT_NODEJS_PORT;
+}
+
+
 console.log("Starting nodepot with config from file " + configNew);
 console.log("Starting Nodepot in " + config.mode  + " mode ");
 console.log("Starting Nodepot listening on local port " + config.port);

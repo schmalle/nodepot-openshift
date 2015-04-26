@@ -29,6 +29,7 @@ function getHtmlPath(config, openShiftDataDir) {
 
     var openShiftDataDir = process.env.OPENSHIFT_DATA_DIR;
 
+
     var configuredHtmlPath = config.html;
     if (openShiftDataDir != undefined)
     {
@@ -48,8 +49,6 @@ function start(configName) {
     console.log("Starting server with config name " + configName);
 
     config = require(configName);
-
-    var port      = process.env.OPENSHIFT_NODEJS_PORT || config.port;
 
     function onRequest(request, response) {
 
@@ -110,7 +109,20 @@ function start(configName) {
         response.end();
     }
 
-    http.createServer(onRequest).listen(port);
+    var openShiftIP = process.env.OPENSHIFT_NODEJS_IP;
+    var port = process.env.OPENSHIFT_NODEJS_PORT || config.port;
+
+    console.log(moment().format('MMMM Do YYYY, h:mm:ss a') + " Server tries to start on port " + port);
+
+    if (openShiftIP != undefined)
+    {
+        http.createServer(onRequest).listen(port, ip);
+    }
+    else
+    {
+        http.createServer(onRequest).listen(port);
+    }
+
     console.log(moment().format('MMMM Do YYYY, h:mm:ss a') + " Server has started.");
 }
 

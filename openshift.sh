@@ -7,3 +7,4 @@ mkdir logs
 mkdir log
 cp ./../repo/template/config.js .
 cp ./../repo/html/* ./html/
+

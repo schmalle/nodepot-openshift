@@ -6,18 +6,26 @@
 
 var moment = require("moment");
 var redis = require("redis");
+var client = undefined;
 
-var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
-if (openShiftIP != undefined)
-{
-    console.log("Starting DB client with ip/port server "  + process.env.OPENSHIFT_REDIS_DB_PORT + " : " + process.env.OPENSHIFT_REDIS_DB_HOST);
-    client = redis.createClient(process.env.OPENSHIFT_REDIS_DB_PORT, process.env.OPENSHIFT_REDIS_DB_HOST, {});
-}
-else
-{
-    console.log("Starting DB without special parameters...");
-    client = redis.createClient();
+function initClient(client) {
+
+    if (client != undefined)
+    return client;
+
+    var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+    if (openShiftIP != undefined) {
+        console.log("Starting DB client with ip/port server " + process.env.OPENSHIFT_REDIS_DB_PORT + " : " + process.env.OPENSHIFT_REDIS_DB_HOST);
+        client = redis.createClient(process.env.OPENSHIFT_REDIS_DB_PORT, process.env.OPENSHIFT_REDIS_DB_HOST, {});
+    }
+    else {
+        console.log("Starting DB without special parameters...");
+        client = redis.createClient();
+    }
+
+    return client;
+
 }
 
 var fs = require("fs");
@@ -55,17 +63,23 @@ function getHtmlPath(config) {
 
 function setstore(url)
 {
+
+    client = initClient(client);
+
     client.sadd("NP_URL", url);
 }
 
 function setstoreMaliciousURL(url)
 {
+    client = initClient(client);
+
     client.sadd("NP_URL_MALICIOUS", url);
 }
 
 /** return all data from the NP_URL set **/
 function setgetall(response, attack, config)
 {
+    client = initClient(client);
 
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
 
@@ -126,6 +140,8 @@ function setgetall(response, attack, config)
 function ismember(url, positive, negative, response, config)
 {
 
+    client = initClient(client);
+
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     if( config != undefined)
     {
@@ -162,7 +178,7 @@ function ismember(url, positive, negative, response, config)
 function isMemberMaliciousURL(url, dest, storeCode, callBack)
 {
 
-
+    client = initClient(client);
 
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
 

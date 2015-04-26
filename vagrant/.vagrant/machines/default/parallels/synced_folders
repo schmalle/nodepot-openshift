@@ -1,0 +1,1 @@
+{"parallels":{"/data":{"guestpath":"/data","hostpath":"/Users/markus/html","disabled":false},"/config":{"guestpath":"/config","hostpath":"/Users/markus/config","disabled":false},"/logs":{"guestpath":"/logs","hostpath":"/Users/markus/logs","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/markus/source/IdeaProjects/Nodepot/vagrant","disabled":false}}}

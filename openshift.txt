@@ -1,0 +1,10 @@
+Openshift
+---------
+
+Openshift is a great cloud solution from Red Hat. It offers free hosting for NodeJS.
+
+1. Create an account at openshift
+
+https://github.com/smarterclayton/openshift-redis-cart
+
+

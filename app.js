@@ -35,7 +35,7 @@ var config = require(configNew);
 
 if (openShiftDataDir != undefined)
 {
-    configNew.port = process.env.OPENSHIFT_NODEJS_PORT;
+    config.port = process.env.OPENSHIFT_NODEJS_PORT;
 }
 
 

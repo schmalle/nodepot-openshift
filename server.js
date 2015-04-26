@@ -46,8 +46,6 @@ function getHtmlPath(config, openShiftDataDir) {
 
 function start(configName) {
 
-    console.log("Starting server with config name " + configName);
-
     config = require(configName);
 
     function onRequest(request, response) {
@@ -112,7 +110,9 @@ function start(configName) {
     var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
     var port = process.env.OPENSHIFT_NODEJS_PORT;
 
-    console.log(moment().format('MMMM Do YYYY, h:mm:ss a') + " Server tries to start on port " + port);
+    if (port != undefined) {
+        console.log(moment().format('MMMM Do YYYY, h:mm:ss a') + " Server tries to start on port " + port);
+    }
 
     if (openShiftIP != undefined)
     {

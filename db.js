@@ -5,18 +5,40 @@
  */
 
 var moment = require("moment");
-
 var redis = require("redis"),
     client = redis.createClient();
 
 var fs = require("fs");
-
 var configGlobal = "none";
+
+
 
 client.on("error", function (err) {
     console.log("Error " + err);
 });
 
+/**
+ * retrive the correct path for the stored html data
+ * @param config
+ * @param openShiftDataDir
+ * @returns {string}
+ */
+function getHtmlPath(config) {
+
+    var openShiftDataDir = process.env.OPENSHIFT_DATA_DIR;
+
+    var configuredHtmlPath = config.html;
+    if (openShiftDataDir != undefined)
+    {
+        configuredHtmlPath = openShiftDataDir + '/html/';
+    }
+    else
+    {
+        configuredHtmlPath = config.html;
+    }
+
+    return configuredHtmlPath;
+}
 
 
 function setstore(url)
@@ -62,7 +84,7 @@ function setgetall(response, attack, config)
 
         console.log("Info: config is " + config);
 
-        var filePath = config.html + "/dork.html";
+        var filePath = getHtmlPath(config) + "/dork.html";
 
         console.log("Before file writing code " + filePath);
         fs.unlinkSync(filePath);

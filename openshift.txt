@@ -5,6 +5,15 @@ Openshift is a great cloud solution from Red Hat. It offers free hosting for Nod
 
 1. Create an account at openshift
 
+2. Create your own application
+
+rhc app create <your name> nodejs-0.10 --from-code=http://github.com/schmalle/nodepot.git
+
+3. Add redis to your application
+
+rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart
+
+
 https://github.com/smarterclayton/openshift-redis-cart
 
 

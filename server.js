@@ -19,6 +19,29 @@ var mimeTypes = {
     "css": "text/css"};
 
 
+/**
+ * retrive the correct path for the stored html data
+ * @param config
+ * @param openShiftDataDir
+ * @returns {string}
+ */
+function getHtmlPath(config, openShiftDataDir) {
+
+    var openShiftDataDir = process.env.OPENSHIFT_DATA_DIR;
+
+    var configuredHtmlPath = config.html;
+    if (openShiftDataDir != undefined)
+    {
+        configuredHtmlPath = openShiftDataDir + '/html/';
+    }
+    else
+    {
+        configuredHtmlPath = config.html;
+    }
+
+    return configuredHtmlPath;
+}
+
 
 function start(configName) {
 
@@ -26,6 +49,7 @@ function start(configName) {
 
     config = require(configName);
 
+    var port      = process.env.OPENSHIFT_NODEJS_PORT || config.port;
 
     function onRequest(request, response) {
 
@@ -38,12 +62,15 @@ function start(configName) {
 
         // get data directory for OpenShift (easy check, if we run in Openshift)
         var openShiftDataDir = process.env.OPENSHIFT_DATA_DIR;
+        var logPath = "/var/log/nodepot.log";
 
-        var configuredHtmlPath = config.html;
-        if (configuredHtmlPath == undefined)
+        var configuredHtmlPath = getHtmlPath(config, openShiftDataDir);
+
+        if (openShiftDataDir != undefined)
         {
-            configuredHtmlPath = './html/';
+            logPath = openShiftDataDir + "/log/nodepot.log"
         }
+
 
         // admin check (query and IP range)
         if ((query == "/admin" || query == "admin") && (S(ip).contains("127.0.0.1") || S(ip).contains(config.home_ip)))
@@ -51,7 +78,7 @@ function start(configName) {
             // show UI
 
             var defaultTemplateStart = fs.readFileSync(configuredHtmlPath + '/adminstart.html', 'utf8');
-            var learnedStuff = fs.readFileSync("/var/log/nodepot.log", 'utf8');
+            var learnedStuff = fs.readFileSync(logPath, 'utf8');
             var defaultTemplateEnd = fs.readFileSync(configuredHtmlPath + '/adminend.html', 'utf8');
             response.write(defaultTemplateStart);
             response.write(learnedStuff);
@@ -83,7 +110,7 @@ function start(configName) {
         response.end();
     }
 
-    http.createServer(onRequest).listen(config.port);
+    http.createServer(onRequest).listen(port);
     console.log(moment().format('MMMM Do YYYY, h:mm:ss a') + " Server has started.");
 }
 

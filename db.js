@@ -7,6 +7,8 @@
 var moment = require("moment");
 var redis = require("redis");
 var client = undefined;
+var fs = require("fs");
+var configGlobal = "none";
 
 
 function initClient(client) {
@@ -28,14 +30,6 @@ function initClient(client) {
 
 }
 
-var fs = require("fs");
-var configGlobal = "none";
-
-
-
-client.on("error", function (err) {
-    console.log("Error " + err);
-});
 
 /**
  * retrive the correct path for the stored html data

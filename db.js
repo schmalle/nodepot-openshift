@@ -19,7 +19,7 @@ function initClient(client) {
     var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
     if (openShiftIP != undefined) {
         console.log("Starting DB client with ip/port server " + process.env.REDIS_DB + " : " + process.env.REDIS_IP);
-        client = redis.createClient(process.env.OPENSHIFT_REDIS_DB_PORT, process.env.OPENSHIFT_REDIS_DB_HOST, {});
+        client = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_IP);
     }
     else {
         console.log("Starting DB without special parameters...");

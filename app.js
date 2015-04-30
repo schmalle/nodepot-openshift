@@ -36,7 +36,7 @@ var config = require(configNew);
 if (openShiftDataDir != undefined)
 {
     config.port = process.env.OPENSHIFT_NODEJS_PORT;
-    console.log("Starting DB client with ip/port server " + process.env.REDIS_PORT + " : " + process.env.REDIS_IP);
+    console.log("Starting DB client with ip/port server " + process.env.OPENSHIFT_REDIS_PORT + " : " + process.env.OPENSHIFT_REDIS_HOST);
 }
 
 

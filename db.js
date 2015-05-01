@@ -6,29 +6,33 @@
 
 var moment = require("moment");
 var redis = require("redis");
-var client = undefined;
 var fs = require("fs");
 var configGlobal = "none";
 
 
-function initClient(client) {
+function initClient() {
 
-    if (client != undefined)
-    return client;
+    var client = "";
 
     var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
-    if (openShiftIP != undefined) {
-        console.log("Starting DB client with ip/port server " + process.env.OPENSHIFT_REDIS_PORT + " : " + process.env.OPENSHIFT_REDIS_HOST);
+    if (openShiftIP != undefined)
+    {
+        console.log("Starting DB client with ip/port server " + process.env.OPENSHIFT_REDIS_PORT + " : " + process.env.OPENSHIFT_REDIS_HOST + " on openshift");
         client = redis.createClient(process.env.OPENSHIFT_REDIS_PORT, process.env.OPENSHIFT_REDIS_HOST);
+        client.auth(process.env.REDIS_PASSWORD);
+
     }
     else {
-        console.log("Starting DB without special parameters...");
+        console.log("Starting DB without special parameters outside of OpenShift environment ...");
         client = redis.createClient();
     }
 
     return client;
 
 }
+
+var client = initClient();
+
 
 
 /**
@@ -57,15 +61,11 @@ function getHtmlPath(config) {
 
 function setstore(url)
 {
-
-    client = initClient(client);
-
     client.sadd("NP_URL", url);
 }
 
 function setstoreMaliciousURL(url)
 {
-    client = initClient(client);
 
     client.sadd("NP_URL_MALICIOUS", url);
 }
@@ -73,7 +73,6 @@ function setstoreMaliciousURL(url)
 /** return all data from the NP_URL set **/
 function setgetall(response, attack, config)
 {
-    client = initClient(client);
 
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
 
@@ -134,8 +133,6 @@ function setgetall(response, attack, config)
 function ismember(url, positive, negative, response, config)
 {
 
-    client = initClient(client);
-
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     if( config != undefined)
     {
@@ -171,8 +168,6 @@ function ismember(url, positive, negative, response, config)
  */
 function isMemberMaliciousURL(url, dest, storeCode, callBack)
 {
-
-    client = initClient(client);
 
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
 

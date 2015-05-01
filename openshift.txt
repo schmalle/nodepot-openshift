@@ -23,3 +23,6 @@ rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect?github=smart
 
 
 (now copy all stuff)
+
+
+    "start": "cd $HOME;/bin/bash ./app-root/repo/openshift.sh;nodejs app.js"

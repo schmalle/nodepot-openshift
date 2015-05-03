@@ -8,7 +8,9 @@ var moment = require("moment");
 var redis = require("redis");
 var fs = require("fs");
 var configGlobal = "none";
+var client = require("./dbcore")
 
+/*
 
 function initClient() {
 
@@ -32,6 +34,7 @@ function initClient() {
 
 var client = initClient();
 
+*/
 
 
 /**

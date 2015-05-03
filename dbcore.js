@@ -1,7 +1,7 @@
 var redis = require("redis");
 
 
-function initclient() {
+function initClient() {
 
     var openShiftIP = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
     if (openShiftIP != undefined) {

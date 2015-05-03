@@ -26,3 +26,24 @@ rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect?github=smart
 
 
     "start": "cd $HOME;/bin/bash ./app-root/repo/openshift.sh;nodejs app.js"
+
+
+
+
+
+ rhc cartridge-status redis -a myapp
+
+I get this:
+
+Using smarterclayton-redis-2.6 (Redis) for 'redis'
+
+RESULT:
+
+Redis is running
+  master (receives writes), mode sharded
+  Connect to: xxhostnumberxx-myapp.rhcloud.com:xxportnumberxx password:xxsomepasswordxx
+I then set ENV variables like so:
+
+rhc set-env OPENSHIFT_REDIS_HOST=xxhostnumberxx-myapp.rhcloud.com -a myapp
+rhc set-env OPENSHIFT_REDIS_PORT=com:xxportnumberxx -a myapp
+rhc set-env REDIS_PASSWORD=password:xxsomepasswordxx -a myapp

@@ -1,4 +1,4 @@
-var server = require("./server");
+var server = require("./servercore");
 
 //
 // Nodepot main start file
@@ -36,7 +36,7 @@ var config = require(configNew);
 if (openShiftDataDir != undefined)
 {
     config.port = process.env.OPENSHIFT_NODEJS_PORT;
-    console.log("Starting DB client with ip/port server " + process.env.OPENSHIFT_REDIS_PORT + " : " + process.env.OPENSHIFT_REDIS_HOST);
+    console.log("Nodepot (app.js): Starting DB client with ip/port server " + process.env.OPENSHIFT_REDIS_PORT + " : " + process.env.OPENSHIFT_REDIS_HOST);
 }
 
 

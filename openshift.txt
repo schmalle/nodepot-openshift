@@ -47,3 +47,5 @@ I then set ENV variables like so:
 rhc set-env OPENSHIFT_REDIS_HOST=xxhostnumberxx-myapp.rhcloud.com -a myapp
 rhc set-env OPENSHIFT_REDIS_PORT=com:xxportnumberxx -a myapp
 rhc set-env REDIS_PASSWORD=password:xxsomepasswordxx -a myapp
+
+  "main": "app.js"

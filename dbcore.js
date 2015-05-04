@@ -20,5 +20,6 @@ function initClient() {
 
 }
 
+module.exports = client;
 exports.initClient = initClient;
 

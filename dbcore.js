@@ -20,6 +20,17 @@ function initClient() {
 
 }
 
+var client = initClient();
+console.log("Starting after initclient...");
+
+if (client != undefined)
+{
+    console.log("client after initClient is defined");
+}
+else
+{
+    console.log("client after initClient is not defined");
+}
+
 module.exports = client;
 exports.initClient = initClient;
-

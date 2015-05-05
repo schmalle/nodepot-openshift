@@ -8,7 +8,8 @@ mkdir log
 cp ./../repo/template/config.js .
 cp ./../repo/html/* ./html/
 cd ./../repo
-node app.js > ./../data/logs/nodepot.txt
+node app.js > ./../data/logs/nodepot.txt &
+
 
 
 

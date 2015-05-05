@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "cd ./app-root/repo; node ./app.js"
   },
   "dependencies": {
     "binary": "*",

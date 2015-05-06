@@ -1,6 +1,8 @@
+var http = require("http");
+
+
 function start(configName) {
 
-    config = require(configName);
 
     function onRequest(request, response) {
 

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "cd ./app-root/repo; node ./app.js"
+    "start": "/bin/sh $HOME/app-root/repo/openshift.sh; cd $HOME/app-root/repo; node ./app.js"
   },
   "dependencies": {
     "binary": "*",

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd app-root/data
+cd $HOME/app-root/data
 mkdir html
 mkdir dl
 mkdir download
